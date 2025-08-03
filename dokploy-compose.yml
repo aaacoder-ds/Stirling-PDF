@@ -12,6 +12,8 @@ services:
       - /mnt/sdb/PDFTools/customFiles:/customFiles
       - /mnt/sdb/PDFTools/logs:/logs
       - /mnt/sdb/PDFTools/pipeline:/pipeline
+      # Mount our custom init script
+      - ./scripts/init-dokploy.sh:/scripts/init-dokploy.sh
     environment:
       - DOCKER_ENABLE_SECURITY=false
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
@@ -20,11 +22,16 @@ services:
       - SYSTEM_MAXFILESIZE=100
       # Use Docker profile for proper server configuration
       - SPRING_PROFILES_ACTIVE=docker
-      # Override Java options to bind to all interfaces
-      - JAVA_CUSTOM_OPTS=-Dserver.address=0.0.0.0 -Dserver.port=8080
+      # Override Java options to bind to all interfaces - multiple approaches
+      - JAVA_CUSTOM_OPTS=-Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -Dspring.main.web-application-type=servlet
+      # Additional Spring Boot properties
+      - SERVER_ADDRESS=0.0.0.0
+      - SERVER_PORT=8080
       # File cleanup settings
       - SYSTEM_CLEANUP_ENABLED=true
       - SYSTEM_CLEANUP_INTERVAL=300
       - SYSTEM_CLEANUP_MAXAGE=3600
       - SYSTEM_CLEANUP_MAXSIZE=26843545600
+    # Override entrypoint to use our custom script
+    entrypoint: ["tini", "--", "/scripts/init-dokploy.sh"]
     restart: unless-stopped
