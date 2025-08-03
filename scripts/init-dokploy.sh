@@ -67,9 +67,12 @@ mkdir -p /tmp/stirling-pdf || true
 if chown -R stirlingpdfuser:stirlingpdfgroup $HOME /logs /scripts /usr/share/fonts/opentype/noto /configs /customFiles /pipeline /tmp/stirling-pdf /app.jar; then
 	chmod -R 755 /logs /scripts /usr/share/fonts/opentype/noto /configs /customFiles /pipeline /tmp/stirling-pdf /app.jar || true
     # If chown succeeds, execute the command as stirlingpdfuser with FORCED server binding
-    exec su-exec stirlingpdfuser java -Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -jar /app.jar
+    # Use sed to replace the startup message and force server binding
+    echo "Starting Stirling-PDF with forced server binding to 0.0.0.0:8080"
+    exec su-exec stirlingpdfuser java -Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -Dspring.main.web-application-type=servlet -jar /app.jar
 else
     # If chown fails, execute the command without changing the user context
     echo "[WARN] Chown failed, running as host user"
-    exec java -Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -jar /app.jar
+    echo "Starting Stirling-PDF with forced server binding to 0.0.0.0:8080"
+    exec java -Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -Dspring.main.web-application-type=servlet -jar /app.jar
 fi
