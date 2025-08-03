@@ -1,0 +1,42 @@
+# Custom settings for PDF Tools deployment
+server:
+  port: 8080
+  address: 0.0.0.0
+
+system:
+  cleanup:
+    enabled: true
+    interval: 300  # 5 minutes
+    maxAge: 3600   # 1 hour
+    maxSize: 1073741824  # 1GB
+
+ui:
+  appName: "PDF Tools"
+  homeDescription: "Free online PDF tools for merging, splitting, compressing and converting PDF documents"
+  appNameNavbar: "PDF Tools"
+
+metrics:
+  enabled: false
+
+google:
+  disable: false
+  enable: true
+
+# Enable all search engines
+bing:
+  enable: true
+
+yahoo:
+  enable: true
+
+duckduckgo:
+  enable: true
+
+qwant:
+  enable: true
+
+baidu:
+  enable: true
+
+yandex:
+  enable: true 

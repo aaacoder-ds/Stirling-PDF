@@ -30,4 +30,15 @@ services:
       - SYSTEM_ENABLEQWANT=true
       - SYSTEM_ENABLEBAIDU=true
       - SYSTEM_ENABLEYANDEX=true
+      # Spring Boot server configuration
+      - SERVER_PORT=8080
+      - SERVER_ADDRESS=0.0.0.0
+      # File cleanup configuration
+      - SYSTEM_CLEANUP_ENABLED=true
+      - SYSTEM_CLEANUP_INTERVAL=300
+      - SYSTEM_CLEANUP_MAXAGE=3600
+      - SYSTEM_CLEANUP_MAXSIZE=1073741824
+      # Additional cleanup settings
+      - STIRLING_TEMPFILES_DIRECTORY=/tmp/stirling-pdf
+      - JAVA_IO_TMPDIR=/tmp/stirling-pdf
     restart: unless-stopped
