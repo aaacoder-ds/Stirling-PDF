@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: aaacoder/stirling-pdf
+  IMAGE_NAME: aaacoder-ds/stirling-pdf
 
 jobs:
   build-and-push:

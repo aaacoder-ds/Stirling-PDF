@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   stirling-pdf:
-    image: ghcr.io/aaacoder/stirling-pdf:latest
+    image: ghcr.io/aaacoder-ds/stirling-pdf:latest
     container_name: stirling-pdf
     ports:
-      - "8080:8080"
+      - "3082:8080"
     volumes:
       - /mnt/sdb/PDFTools/trainingData:/usr/share/tessdata
       - /mnt/sdb/PDFTools/extraConfigs:/configs
