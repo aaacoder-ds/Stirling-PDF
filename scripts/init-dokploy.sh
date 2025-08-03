@@ -67,26 +67,31 @@ mkdir -p /tmp/stirling-pdf || true
 if chown -R stirlingpdfuser:stirlingpdfgroup $HOME /logs /scripts /usr/share/fonts/opentype/noto /configs /customFiles /pipeline /tmp/stirling-pdf /app.jar; then
 	chmod -R 755 /logs /scripts /usr/share/fonts/opentype/noto /configs /customFiles /pipeline /tmp/stirling-pdf /app.jar || true
     # If chown succeeds, execute the command as stirlingpdfuser with FORCED server binding
-    # Use a different approach - override the application's configuration
     echo "Starting Stirling-PDF with forced server binding to 0.0.0.0:8080"
-    # Create a temporary application.properties file to override server binding
+    # Create a temporary application.properties file to override server binding and fix PostHog
     cat > /tmp/application-override.properties << EOF
 server.address=0.0.0.0
 server.port=8080
 server.bind-address=0.0.0.0
 spring.main.web-application-type=servlet
+posthog.api.key=dummy-key-for-docker
+posthog.host=https://eu.i.posthog.com
+posthog.enabled=false
 EOF
     exec su-exec stirlingpdfuser java -Dspring.config.location=file:/tmp/application-override.properties -Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -Dspring.main.web-application-type=servlet -jar /app.jar
 else
     # If chown fails, execute the command without changing the user context
     echo "[WARN] Chown failed, running as host user"
     echo "Starting Stirling-PDF with forced server binding to 0.0.0.0:8080"
-    # Create a temporary application.properties file to override server binding
+    # Create a temporary application.properties file to override server binding and fix PostHog
     cat > /tmp/application-override.properties << EOF
 server.address=0.0.0.0
 server.port=8080
 server.bind-address=0.0.0.0
 spring.main.web-application-type=servlet
+posthog.api.key=dummy-key-for-docker
+posthog.host=https://eu.i.posthog.com
+posthog.enabled=false
 EOF
     exec java -Dspring.config.location=file:/tmp/application-override.properties -Dserver.address=0.0.0.0 -Dserver.port=8080 -Dserver.bind-address=0.0.0.0 -Dspring.main.web-application-type=servlet -jar /app.jar
 fi
