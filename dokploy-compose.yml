@@ -32,6 +32,6 @@ services:
       - SYSTEM_CLEANUP_INTERVAL=300
       - SYSTEM_CLEANUP_MAXAGE=3600
       - SYSTEM_CLEANUP_MAXSIZE=26843545600
-    # Override entrypoint to use our custom script
-    entrypoint: ["tini", "--", "/scripts/init-dokploy.sh"]
+    # Override entrypoint to use our custom script with proper permissions
+    entrypoint: ["sh", "-c", "chmod +x /scripts/init-dokploy.sh && tini -- /scripts/init-dokploy.sh"]
     restart: unless-stopped
