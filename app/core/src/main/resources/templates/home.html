@@ -29,7 +29,13 @@
                     <div class="lead fs-4"
                       th:text="${@homeText != 'null' and @homeText != null and @homeText != ''} ? ${@homeText} : #{home.desc}">
                   </div>
+                  <div class="mt-3 text-center">
+                    <a href="https://dash.aaacoder.xyz/" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                      <i class="material-symbols-rounded me-2">dashboard</i>
+                      Discover more utility tools
+                    </a>
                   </div>
+                </div>
                   <div id="groupRecent" style="width: fit-content; margin: 0 auto">
                     <div
                       th:replace="~{fragments/featureGroupHeader :: featureGroupHeader(groupTitle=#{navbar.recent})}">

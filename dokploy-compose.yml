@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  stirling-pdf:
+    image: ghcr.io/aaacoder/stirling-pdf:latest
+    container_name: stirling-pdf
+    ports:
+      - "8080:8080"
+    volumes:
+      - /mnt/sdb/PDFTools/trainingData:/usr/share/tessdata
+      - /mnt/sdb/PDFTools/extraConfigs:/configs
+      - /mnt/sdb/PDFTools/customFiles:/customFiles
+      - /mnt/sdb/PDFTools/logs:/logs
+      - /mnt/sdb/PDFTools/pipeline:/pipeline
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en_US
+      - SYSTEM_DEFAULTLOCALE=en-US
+      - UI_APPNAME=PDF Tools
+      - UI_HOMEDESCRIPTION=Free online PDF tools for merging, splitting, compressing and converting PDF documents
+      - UI_APPNAMENAVBAR=PDF Tools
+      - SYSTEM_MAXFILESIZE=100
+      - METRICS_ENABLED=false
+      - SYSTEM_GOOGLEDISABLE=false
+      - SYSTEM_ENABLEGOOGLE=true
+      - SYSTEM_ENABLEBING=true
+      - SYSTEM_ENABLEYAHOO=true
+      - SYSTEM_ENABLEDUCKDUCKGO=true
+      - SYSTEM_ENABLEQWANT=true
+      - SYSTEM_ENABLEBAIDU=true
+      - SYSTEM_ENABLEYANDEX=true
+    restart: unless-stopped

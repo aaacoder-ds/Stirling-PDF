@@ -2,12 +2,35 @@
   <!-- Title -->
   <title th:text="${@appName} + (${title} != null and ${title} != '' ? ' - ' + ${title} : '')"></title>
 
-  <!-- Metadata -->
+  <!-- Enhanced Metadata -->
   <meta charset="utf-8">
-  <meta name="description" th:content="${@appName} + (${header} != null and ${header} != '' ? ' - ' + ${header} : '')">
+  <meta name="description" th:content="${@appName} + (${header} != null and ${header} != '' ? ' - ' + ${header} : '') + ' - Free online PDF tools for merging, splitting, compressing, converting, and editing PDF documents. No registration required, privacy-focused PDF processing.'">
+  <meta name="keywords" content="PDF tools, PDF merge, PDF split, PDF compress, PDF convert, PDF to Word, PDF to Excel, PDF OCR, PDF watermark, PDF security, online PDF editor, free PDF tools, PDF processing">
+  <meta name="author" content="PDF Tools">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
   <meta name="msapplication-TileColor" content="#2d89ef">
   <meta name="theme-color" content="#ffffff">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pdftools.aaacoder.xyz/">
+  <meta property="og:title" th:content="${@appName} + (${title} != null and ${title} != '' ? ' - ' + ${title} : '')">
+  <meta property="og:description" content="Free online PDF tools for merging, splitting, compressing, converting, and editing PDF documents. No registration required, privacy-focused PDF processing.">
+  <meta property="og:image" content="https://pdftools.aaacoder.xyz/android-chrome-512x512.png">
+  <meta property="og:site_name" content="PDF Tools">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://pdftools.aaacoder.xyz/">
+  <meta property="twitter:title" th:content="${@appName} + (${title} != null and ${title} != '' ? ' - ' + ${title} : '')">
+  <meta property="twitter:description" content="Free online PDF tools for merging, splitting, compressing, converting, and editing PDF documents. No registration required, privacy-focused PDF processing.">
+  <meta property="twitter:image" content="https://pdftools.aaacoder.xyz/android-chrome-512x512.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" th:href="@{${#request.requestURI}}">
 
   <!-- Icons -->
   <link rel="apple-touch-icon" sizes="180x180" th:href="@{'/apple-touch-icon.png'}">
@@ -16,11 +39,52 @@
   <link rel="manifest" th:href="@{'/site.webmanifest'}" crossorigin="use-credentials">
   <link rel="mask-icon" th:href="@{'/safari-pinned-tab.svg'}" color="#ca2b2a">
   <link rel="shortcut icon" th:href="@{'/favicon.ico'}">
-  <meta name="apple-mobile-web-app-title" content="Stirling PDF">
-  <meta name="application-name" content="Stirling PDF">
+  <meta name="apple-mobile-web-app-title" content="PDF Tools">
+  <meta name="application-name" content="PDF Tools">
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="theme-color" content="#ffffff">
 
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Tools",
+    "description": "Free online PDF tools for merging, splitting, compressing, converting, and editing PDF documents",
+    "url": "https://pdftools.aaacoder.xyz/",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "PDF Tools"
+    },
+    "featureList": [
+      "PDF Merge",
+      "PDF Split", 
+      "PDF Compress",
+      "PDF Convert",
+      "PDF to Word",
+      "PDF to Excel",
+      "PDF OCR",
+      "PDF Watermark",
+      "PDF Security"
+    ]
+  }
+  </script>
+
+  <!-- Required Tracking Scripts -->
+  <script defer data-domain="pdftools.aaacoder.xyz" src="https://plausible.aaacoder.xyz/js/script.js"></script>
+  <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+  <script type="text/javascript">
+      aclib.runAutoTag({
+          zoneId: 'harbje7uvv',
+      });
+  </script>
   <script>
     window.stirlingPDF = window.stirlingPDF || {};
     
