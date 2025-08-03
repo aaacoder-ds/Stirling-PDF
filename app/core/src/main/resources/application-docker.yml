@@ -18,8 +18,4 @@ server:
     threads:
       max: 200
       min-spare: 10
-
-# Force binding to all interfaces
-server:
-  address: 0.0.0.0
-  port: 8080 
+ 
