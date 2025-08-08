@@ -61,6 +61,12 @@ public class HomeWebController {
         return "releases";
     }
 
+    @GetMapping("/404")
+    @Hidden
+    public String explicit404() {
+        return "error/404";
+    }
+
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("currentPage", "home");
