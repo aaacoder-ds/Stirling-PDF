@@ -1,10 +1,26 @@
 # Main stage
+FROM gradle:8.7.0-jdk17 AS builder
+
+WORKDIR /workspace
+
+# Copy the repository and build the core app jar inside the container
+COPY . .
+
+# Build only the core module jar to match the expected path app/core/build/libs/*.jar
+# Disable tests and optional features to speed up the build
+ENV DISABLE_ADDITIONAL_FEATURES=true \
+    STIRLING_PDF_DESKTOP_UI=false
+
+RUN ./gradlew --no-daemon clean :stirling-pdf:bootJar -x test
+
+
+# Main stage
 FROM alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
 
 # Copy necessary files
 COPY scripts /scripts
 COPY app/core/src/main/resources/static/fonts/*.ttf /usr/share/fonts/opentype/noto/
-COPY app/core/build/libs/*.jar app.jar
+COPY --from=builder /workspace/app/core/build/libs/*.jar app.jar
 
 ARG VERSION_TAG
 
